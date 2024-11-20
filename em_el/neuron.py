@@ -60,18 +60,18 @@ class SingleNeuron(object):
 
         self.weight = np.random.rand(X.shape[1])
         self.bias = np.random.rand()
-        self.errors_ = []
+        self.model_errors = []
 
         N = X.shape[0]
 
         for _ in range(epochs):
-            errors = 0
+            epoch_error = 0
             for xi, yi in zip(X, y):
-                error = (self.predict(xi) - yi)
-                self.weight -= alpha * error * xi
-                self.bias -= alpha * error
-                errors += self.cost_function(self.predict(xi), yi)
-            self.errors_.append(errors/N)
+                entry_error = (self.predict(xi) - yi)
+                self.weight -= alpha * entry_error * xi
+                self.bias -= alpha * entry_error
+                epoch_error += self.cost_function(self.predict(xi), yi)
+            self.model_errors.append(epoch_error / N)
         return self
 
     def predict(self, x):
@@ -85,10 +85,12 @@ class SingleNeuron(object):
         return self.activation_function(preactivation)
 
     def plot_cost_function(self):
+        """
+        Plots the epoch-wise cost based on the cost function supplied during model initialization
+        """
+
         fig, axs = plt.subplots(figsize = (10, 8))
-        axs.plot(range(1, len(self.errors_) + 1),
-                self.errors_,
-                label = "Cost function")
+        axs.plot(range(1, len(self.model_errors) + 1), self.model_errors, label ="Cost function")
         axs.set_xlabel("epochs", fontsize = 15)
         axs.set_ylabel("Cost", fontsize = 15)
         axs.legend(fontsize = 15)
