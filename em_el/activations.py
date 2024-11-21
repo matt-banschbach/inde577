@@ -2,7 +2,9 @@ import numpy as np
 
 __all__ = [
     'sign',
-    'sigmoid'
+    'sigmoid',
+    'd_sigmoid',
+    'constant'
 ]
 
 def sign(x):
@@ -60,6 +62,9 @@ def sigmoid(x):
     """
 
     return 1 / (1 + np.exp(-x))
+
+def d_sigmoid(x):
+    return sigmoid(x)*(1-sigmoid(x))
 
 def RELU(x):
     """

@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from em_el.utils import *
 
 
 __all__ = ['SingleNeuron']
@@ -44,6 +45,11 @@ class SingleNeuron(object):
     """
 
     def __init__(self, activation_function, cost_function):
+        """
+
+        :param activation_function: activation function
+        :param cost_function: cost function
+        """
         self.activation_function = activation_function
         self.cost_function = cost_function
 
