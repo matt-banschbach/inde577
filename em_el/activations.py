@@ -4,7 +4,8 @@ __all__ = [
     'sign',
     'sigmoid',
     'd_sigmoid',
-    'constant'
+    'constant',
+    'RELU'
 ]
 
 def sign(x):
