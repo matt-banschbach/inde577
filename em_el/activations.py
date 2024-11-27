@@ -69,7 +69,7 @@ def d_sigmoid(x):
 
 def RELU(x):
     """
-
+    The RELU activiation function returns the maximum of the preactiviation value and 0
     :param x: (array-like or scalar) Input value(s) for which the RELU function is computed.
     :return: Function output of RELU with input x
     """
