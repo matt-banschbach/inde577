@@ -127,4 +127,9 @@ class KMeans:
         :return: (float) the proportion of correctly classified samples
         """
         return np.sum(self.classification == y) / (len(self.classification))
-        
+
+
+class DBSCAN:
+    """
+    Density-based
+    """
