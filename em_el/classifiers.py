@@ -3,6 +3,7 @@ from em_el.utils import *
 from em_el.activations import *
 from em_el.loss_functions import *
 import operator
+import numpy as np
 
 
 
