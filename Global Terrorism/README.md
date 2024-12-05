@@ -11,3 +11,4 @@ provided by Kaggle (free account needed)
 
 ACLED
 provided by ACLED (free account needed)
+Codebook link: https://acleddata.com/knowledge-base/codebook/
