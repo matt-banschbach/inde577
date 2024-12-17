@@ -3,6 +3,16 @@
 
 ### Directory Contents
 
+##### Linear Model
+
+Features Linear ML Algorithms
+
+**Algorihms Implemented**
+- Perceptron
+- LinearRegression
+- LogisticRegression
+
+
 ___
 ### Datasets
 I chose to implement each algorithm on simple datasets loaded from Seaborn and Scikit-learn, 
