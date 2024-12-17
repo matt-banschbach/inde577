@@ -1,7 +1,3 @@
-# K-Nearest Neighbors (KNN)
-___
-
-### Description
 # K-nearest neighbors (KNN)
 ___
 
@@ -39,16 +35,25 @@ ___
 
 ### Datasets
 
-I implement KNN on several basic datasets from Seaborn in `knn_basic.ipynb`
-
-**Seaborn Datasets**
+The following datasets are used
 - penguins
 - wine
 
-to use these datasets, ensure that the seaborn package is installed. Data can then be loaded using `sns.load_dataset()`. 
-For example, the penguins dataset can be loaded as such:
+And can be loaded as follows:
+
+Penguins: 
 
 ```python
 import seaborn as sns
 sns.load_dataset('penguins')
 ```
+
+Wine:
+
+```python
+from em_el.datasets import load_wine
+wine = load_wine()
+```
+
+### Reproducibility
+Ensure `random_state` parameter is set to 42 for all uses

@@ -9,7 +9,9 @@ ___
 - Activiation Functions
 - Loss Functions
 - Utilities
+- Datesets
 
+___
 
 ##### Algorithms
 - Classification
@@ -39,3 +41,16 @@ ___
 - Mean Squared Error
 - Binary Cross Entropy
 
+___
+
+##### Datasets
+- load_wine()
+- load_penguins()
+- load_NPORS()
+
+
+___
+
+##### Misc. Utilities
+- draw_confusion_matrix(cf_matrix, title)
+- clf_metrics(y_true, y_pred)
