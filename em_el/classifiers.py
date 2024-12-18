@@ -103,7 +103,7 @@ class PerceptronClassifier:
     """
 
     def __init__(self):
-        self.neuron = SingleNeuron(sign, binary_cross_entropy)
+        self.neuron = SingleNeuron(sign, mse)
 
     def train(self, X, y, alpha, epochs):
         """

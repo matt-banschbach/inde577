@@ -1,6 +1,7 @@
 # em_el
 ___
-em_el encapsulates several common Machine Learning algorithms written from scratch for INDE577 taken at Rice University, as well as several other helpful utiliites.
+em_el encapsulates several common Machine Learning algorithms written from scratch for INDE577 taken at Rice University, 
+as well as several other helpful utiliites.
 
 ___
 
@@ -44,13 +45,12 @@ ___
 ___
 
 ##### Datasets
-- load_wine()
-- load_penguins()
-- load_NPORS()
+- load_wine() --- Processes the Wine Dataset into a pd.DataFrame
+
 
 
 ___
 
 ##### Misc. Utilities
-- draw_confusion_matrix(cf_matrix, title)
-- clf_metrics(y_true, y_pred)
+- draw_confusion_matrix(cf_matrix, title) --- Draws a Confusion Matrix for Classification Problems
+- euclidean(a, b) --- Euclidean Distance
