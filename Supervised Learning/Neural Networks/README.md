@@ -12,8 +12,8 @@ The underlying mathematics of neural networks involves:
 2. Activation functions: Nodes use non-linear functions like sigmoid or ReLU to introduce non-linearity.
 3. Forward propagation: The input is processed through the network using the formula:
 
-   $$ z = \sum_{i=1}^n w_i x_i + b $$
-   $$ \hat{y} = \sigma(z) $$
+   $$z = \sum_{i=1}^n w_i x_i + b$$
+   $$\hat{y} = \sigma(z) $$
 
    Where $w_i$ are weights, $x_i$ are inputs, $b$ is bias, and $\sigma$ is the activation function.
 
