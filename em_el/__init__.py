@@ -6,5 +6,5 @@ from em_el.linear_model import *
 from em_el.loss_functions import *
 from em_el.neural import *
 from em_el.neuron import *
-from em_el.tree import *
+from em_el.tree2 import *
 from em_el.utils import *

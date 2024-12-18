@@ -1,118 +1,110 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from tensorflow.python.eager.executor import Executor
 
 from em_el.utils import euclidean
+import numpy as np
+
+
+def euclidean(point, data):
+    """
+    Return euclidean distances between a point & a dataset
+    """
+    return np.sqrt(np.sum((point - data)**2, axis=1))
+
 
 class KMeans:
     """
-    K Means clustering
+    KMeans clustering algorithm implementation.
+
+    Parameters:
+    k (int): Number of clusters.
+    max_iter (int): Maximum number of iterations for the algorithm to run.
     """
 
     def __init__(self, k, max_iter=100):
-        """
-        Initializes a KMeans clustering object
-        :param k: Number of clusters
-        :param max_iter: Maximum number of algorithmic iterations before clustering algorithm terminates
-        """
-
-        self.classification = None
-        self.sorted_points = None
-        self.centroids = None
         self.k = k
         self.max_iter = max_iter
-    
-    @staticmethod
-    def _initialize_centroids(k, X):
+
+    def initialize_centroids(self, X):
         """
-        Initializes Centroids using the KMeans++ method, where a random datapoint is selected as the first,
-        # then the rest are initialized w/ probabilities proportional to their distances to the first
-        :param k: Number of clusters
-        :param X: (array-like) Feature Data
-        :return: (list) the initial centroids
+        Initialize centroids using the k-means++ method.
+
+        Parameters:
+        X (np.ndarray): The dataset.
+
+        Returns:
+        np.ndarray: Initial centroids.
         """
-        try:
-            # Pick a random point from train data for first centroid
-            centroids = [X[np.random.choice(len(X))]]  # TODO: More efficient way to do this?
+        # Pick a random point from train data for the first centroid
+        centroids = [X[np.random.choice(len(X))]]
 
-            for _ in range(k - 1):  # We only need to set k-1 other centroids randomly
-                # Calculate distances from points to the centroids
-                dists = np.sum([euclidean(centroid, X) for centroid in centroids], axis=0)  # TODO: Why is this np.sum here?
+        for _ in range(self.k - 1):
+            # Calculate distances from points to the centroids
+            dists = np.min(euclidean(X, centroids), axis=1)
+            # Normalize the distances
+            dists /= np.sum(dists)
+            # Choose remaining points based on their distances
+            new_centroid_idx = np.random.choice(range(len(X)), size=1, p=dists)[0]
+            centroids.append(X[new_centroid_idx])
 
-                # Normalize the distances
-                dists /= np.sum(dists)
-
-                # Choose remaining points based on their distances; points further away have higher likelihood
-                new_centroid_idx = np.random.choice(range(len(X)), size=1, p=dists)[0]  # Indexed @ zero to get val, not array of val
-                centroids.append(X[new_centroid_idx])
-
-            return centroids
-        except Exception as e:
-            print(f"Error during centroid initialization.")
-            print(f"Exception: {e}")
-            raise e
-
+        return np.array(centroids)
 
     def fit(self, X):
         """
-        Fits clusters using KMeans algorithm with max_iters iterations
-        :param X: (array-like) Feature Vectors
-        :return: (list of lists) Points in lists corresponding to centroid
+        Fit the KMeans algorithm to the dataset.
+
+        Parameters:
+        X (np.ndarray): The dataset.
         """
+        self.centroids = self.initialize_centroids(X)
 
-        try:
-            self.centroids = self._initialize_centroids(self.k, X)  # Initialize Centroids
-            for alg_iter in range(self.max_iter):
-                # Sort each datapoint, assigning to nearest centroid
-                self.sorted_points = [[] for _ in range(self.k)]  # Each point is placed within one of these k lists
+        for iter in range(self.max_iter):
+            # Sort each datapoint, assigning to nearest centroid
+            sorted_points = [[] for _ in range(self.k)]
 
-                for x in X:
-                    dists = euclidean(x, self.centroids)  # Get distance from x to each
-                    centroid_idx = np.argmin(dists)  # Get minimum distance centroid
-                    self.sorted_points[centroid_idx].append(x)  # Associate x with that centroid
+            for x in X:
+                dists = euclidean([x], self.centroids)[0]
+                centroid_idx = np.argmin(dists)
+                sorted_points[centroid_idx].append(x)
 
-                prev_centroids = self.centroids
-                # Recalculate centroids as means of all associated points
-                self.centroids = [np.mean(cluster, axis=0) for cluster in self.sorted_points]
+            # Push current centroids to previous, reassign centroids as mean of the points belonging to them
+            prev_centroids = self.centroids
+            self.centroids = [np.mean(cluster, axis=0) if cluster else prev_centroids[i] for i, cluster in enumerate(sorted_points)]
 
-                for i, centroid in enumerate(self.centroids):  # TODO: Why is this how we handle this?
-                    if np.isnan(centroid).any():  # Catch any np.nans, resulting from a centroid having no points
-                        self.centroids[i] = prev_centroids[i]
+            # Check for convergence
+            if np.all(prev_centroids == self.centroids):
+                break
 
-                return self.sorted_points
-
-        except Exception as e:
-            print(f"Error during fitting; exception: {e}")
-            raise e
-
+        self.sorted_points = sorted_points
 
     def evaluate(self, X):
         """
-        Returns the index (class) and value of the centroid associated with each point in X
-        :param X: Feature vectors
-        :return: (list, list)
-            - corr_centroid: The centroid values to which each point x is associated
-            - classification: The index (class) to which each point x is associated
+        Evaluate the dataset by assigning each point to the nearest centroid.
+
+        Parameters:
+        X (np.ndarray): The dataset.
+
+        Returns:
+        tuple: Centroids and their corresponding indices for each point.
         """
-
-        corr_centroid = []
-        classification = []
+        centroids = []
+        centroid_idxs = []
         for x in X:
-            dists = euclidean(x, self.centroids)  # Get distance of x from each centroid
-            centroid_idx = np.argmin(dists)  # Get the centroid index (class) of x
-            corr_centroid.append(self.centroids[centroid_idx])  # Add the centroid associated with x to the return structure
-            classification.append(centroid_idx)  # Add the assigned class of x to the return structure
+            dists = euclidean([x], self.centroids)[0]
+            centroid_idx = np.argmin(dists)
+            centroids.append(self.centroids[centroid_idx])
+            centroid_idxs.append(centroid_idx)
 
-        return corr_centroid, classification
+        return centroids, centroid_idxs
 
     def inertia(self):
         """
-        Calculates the WCSS of the model
+        Calculate the Within-Cluster Sum of Squares (WCSS).
 
-        :return: (float) The model's WCSS
+        Returns:
+        float: WCSS value.
         """
-
         wcss = 0
         for i in range(self.k):
             cluster_points = np.array(self.sorted_points[i])
@@ -120,13 +112,20 @@ class KMeans:
             wcss += np.sum((cluster_points - centroid) ** 2)
         return wcss
 
-    def classification_error(self, y):
+    def classification_error(self, X, y):
         """
-        Calculates the classification success ratio, if classes of data are known.
-        :param y: Actual class labels
-        :return: (float) the proportion of correctly classified samples
+        Calculate the classification error.
+
+        Parameters:
+        X (np.ndarray): The dataset.
+        y (np.ndarray): True labels.
+
+        Returns:
+        float: Classification error rate.
         """
-        return np.sum(self.classification == y) / (len(self.classification))
+        _, centroid_idxs = self.evaluate(X)
+        return np.sum(centroid_idxs != y) / len(y)
+
 
 
 class DBSCAN:

@@ -45,11 +45,25 @@ ___
 
 The following datasets are used:
 - wine
+- penguins
 
 And can be loaded as follows:
+
+Wine:
 
 ```python
 from em_el.datasets import load_wine
 wine = load_wine()
 ```
 
+Penguins: 
+
+```python
+import seaborn as sns
+sns.load_dataset('penguins')
+```
+___
+
+### Reproducibility
+
+Ensure all `random_state` parameter values are set to 42
