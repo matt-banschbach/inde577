@@ -2,7 +2,10 @@
 
 ## Overview
 
-Neural networks are machine learning models inspired by the structure and function of the human brain. They consist of interconnected nodes, or artificial neurons, organized in layers: an input layer, one or more hidden layers, and an output layer[1]. These networks are designed to recognize patterns, process complex data, and make decisions in a manner similar to biological neurons.
+Neural networks are machine learning models inspired by the structure and function of the human brain. 
+They consist of interconnected nodes, or artificial neurons, organized in layers: an input layer, 
+one or more hidden layers, and an output layer. These networks are designed to recognize patterns, 
+process complex data, and make decisions in a manner similar to biological neurons.
 
 ### Mathematical Foundation
 
@@ -27,7 +30,7 @@ through the network, hence its name.
 The core of backpropagation relies on the chain rule from calculus. For a neural network with a loss function L, 
 weights w, and inputs x, the goal is to compute ∂L/∂w. This is achieved by breaking down the computation into smaller steps:
 
-$$ \frac{\partial L}{\partial w} = \frac{\partial L}{\partial y} \cdot \frac{\partial y}{\partial z} \cdot \frac{\partial z}{\partial w} $$
+$$\frac{\partial L}{\partial w} = \frac{\partial L}{\partial y} \cdot \frac{\partial y}{\partial z} \cdot \frac{\partial z}{\partial w}$$
 
 Where:
 - y is the output of a neuron
@@ -51,20 +54,23 @@ The update rule for weights is generally:
 
 $$ w_{new} = w_{old} - \alpha \frac{\partial L}{\partial w} $$
 
-Where α is the learning rate[2][5].
+Where α is the learning rate.
 
 ##### Efficiency and Implementation
 
-Backpropagation is computationally efficient because it reuses intermediate results from the forward pass. This avoids redundant calculations and makes the algorithm suitable for training large neural networks[7].
+Backpropagation is computationally efficient because it reuses intermediate results from the forward pass. 
+This avoids redundant calculations and makes the algorithm suitable for training large neural networks.
 
-The algorithm considers all neurons equally and calculates their derivatives for each backward pass. This allows for parallel computation, making it well-suited for implementation on GPUs[5].
+The algorithm considers all neurons equally and calculates their derivatives for each backward pass. 
+This allows for parallel computation, making it well-suited for implementation on GPUs.
 ___
 
 ### Benefits
 
 1. Handling unstructured data: Neural networks excel at processing large volumes of raw, unorganized data.
 2. Continuous learning: They improve accuracy over time through iterative training.
-3. Versatility: Neural networks can be applied to various tasks, including image recognition, natural language processing, and speech recognition.
+3. Versatility: Neural networks can be applied to various tasks, including image recognition, natural 
+language processing, and speech recognition.
 4. Parallel processing: Their structure allows for efficient parallel computation.
 
 ### Limitations
@@ -79,13 +85,13 @@ ___
 
 ### Typical Uses and Purposes
 
-1. Computer vision: Image classification, object detection, and facial recognition[4][8].
-2. Natural Language Processing (NLP): Language translation, sentiment analysis, and chatbots[8].
-3. Speech recognition: Converting spoken words to text for virtual assistants and transcription services[8].
-4. Autonomous vehicles: Analyzing sensor data for real-time decision making[8].
-5. Healthcare: Medical image analysis for disease detection and diagnosis[8].
-6. Financial forecasting: Predicting market trends and stock prices[13].
-7. Recommendation systems: Personalizing content and product suggestions on platforms like Netflix and Instagram[12].
+1. Computer vision: Image classification, object detection, and facial recognition.
+2. Natural Language Processing (NLP): Language translation, sentiment analysis, and chatbots.
+3. Speech recognition: Converting spoken words to text for virtual assistants and transcription services.
+4. Autonomous vehicles: Analyzing sensor data for real-time decision making.
+5. Healthcare: Medical image analysis for disease detection and diagnosis.
+6. Financial forecasting: Predicting market trends and stock prices.
+7. Recommendation systems: Personalizing content and product suggestions on platforms like Netflix and Instagram.
 
 ## Directory Contents
 
