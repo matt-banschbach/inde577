@@ -46,58 +46,24 @@ where $\theta$ represents the model parameters, $\alpha$ is the learning rate, $
 
 ### Directory Contents
 
-##### Linear Model
+**Linear Model**
+- Perceptron (from scratch)
+- LinearRegression (from scratch)
+- LogisticRegression (from scratch)
 
-Features Linear ML Algorithms
-
-**Implementations**
-- Perceptron on Penguins
-- LinearRegression on Penguins
-- LogisticRegression on Penguins
-
-
-##### Neural Networks
-
-- Dense Neural Network on MNIST Hand-written numbers dataset (written from scratch)
-- Dense Neural Network on Wine Dataset
-- Dense Neural Network on NPORS Dataset
+**Neural Networks**
+- Dense Neural Network on MNIST Hand-written numbers dataset (from scratch)
+- Dense Neural Network on Wine Dataset (tensorflow/keras)
 
 ##### K-Nearest Neighbors (KNN)
-
-- 
-- KNN on Penguins Dataset
-- 
-
+- KNN (from scratch)
+- KNN (sklearn)
 
 ##### Decision Trees
-- 
-- Decision Trees
+- Decision Tree (from scratch)
+- Decision Tree (sklearn)
 
 ##### Random Forest and Ensemble Methods
-
-
-___
-### Datasets
-
-I primarily use the penguins and wine datasets, which can be loaded with the following
-
-Penguins:
-```python
-import seaborn as sns
-sns.load_dataset('penguins')
-```
-
-Wine (using sklearn):
-
-```python
-from sklearn.datasets import load_wine
-wine = load_wine()
-```
-
-OR using my package, em_el:
-```python
-from em_el.datasets import load_wine
-wine = load_wine()
-```
-
-the latter method abstracts away necessary preprocessing.
+- Bagging & Random Forest (sklearn)
+- Voting with Random Forest, Decision Tree, and SVM (sklearn)
+- Boosting (sklearn)

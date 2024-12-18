@@ -101,7 +101,6 @@ Features Neural Network Implementations
 The following datasets are used:
 - wine
 - MNIST
-- NPORS
 
 They can be loaded as follows:
 
@@ -117,22 +116,6 @@ Wine:
 ```python
 from em_el.datasets import load_wine
 wine = load_wine()
-```
-
-**NPORS**
-
-The NPORS dataset is accessible at https://www.pewresearch.org/methods/fact-sheet/national-public-opinion-reference-survey-npors/
-Per the dataset's terms of use, a PewResearch account is required for access and download. You can register for an account here:
-https://www.pewresearch.org/profile/registration/
-
-Once you have downloaded the survey dataset (it will be a .sav file), and assuming you have imported pyreadstat into your environment,
-the dataset can me loaded as follows:
-
-```python
-import pyreadstat
-import pandas as pd
-
-npors_raw = pd.read_spss("NPORS_2024_for_public_release.sav")
 ```
 
 ## Reproducibility
